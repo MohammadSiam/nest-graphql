@@ -1,0 +1,21 @@
+# ------------------------------------------------------
+# THIS FILE WAS AUTOMATICALLY GENERATED (DO NOT MODIFY)
+# ------------------------------------------------------
+
+type Post {
+  id: ID!
+  title: String!
+  content: String
+  category: String!
+  tags: [String!]!
+  published: Boolean!
+}
+
+type Query {
+  posts: [Post!]!
+}
+
+type Mutation {
+  createPost(title: String!, content: String!, category: String!, tags: [String!]!, published: Boolean!): Post!
+  deletePost(id: String!): Post!
+}
