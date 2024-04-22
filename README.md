@@ -71,3 +71,85 @@ Nest is an MIT-licensed open source project. It can grow thanks to the sponsors 
 ## License
 
 Nest is [MIT licensed](LICENSE).
+
+## APIs
+
+# Write your query or mutation here
+
+#create
+
+# mutation {
+
+# createPost(inputs: {
+
+# title: "Sample Title",
+
+# content: "Sample Content",
+
+# category: "Sample Category",
+
+# tags: ["tag1", "tag2"],
+
+# published: true
+
+# })
+
+# {
+
+# id
+
+# }
+
+# }
+
+#get
+
+# query {
+
+# posts {
+
+# id
+
+# title
+
+# }
+
+# }
+
+#update
+
+# mutation {
+
+# updatePost(
+
+# id: "95b18279-af73-429d-bcf5-88b2faed1476",
+
+# input: {
+
+# title: "Updated Title for id 1...70",
+
+# content: "Updated Content",
+
+# category: "Updated Category",
+
+# tags: ["tag1", "tag2"],
+
+# published: true
+
+# }
+
+# ) {
+
+# id
+
+# }
+
+# }
+
+#delete
+
+# mutation {
+
+# deletePost(id: "756ef75a-b11d-45c3-8841-d4e4a0dc750d")
+
+# }
