@@ -1,6 +1,8 @@
 import { Resolver, Query, Mutation, Args } from '@nestjs/graphql';
 import { PostsService } from './posts.service'; // Import your service
 import { Post } from './entities/post.entity'; // Import your entity
+import { CreatePostInput } from './dto/create-post.input';
+import { UpdatePostInput } from './dto/update-post.input';
 
 @Resolver(() => Post)
 export class PostsResolver {
@@ -13,19 +15,32 @@ export class PostsResolver {
 
   @Mutation(() => Post)
   async createPost(
-    @Args('title') title: string,
-    @Args('content') content: string,
-    @Args('category') category: string,
-    @Args('tags', { type: () => [String] }) tags: string[],
-    @Args('published') published: boolean
+    @Args('inputs') input: CreatePostInput,
   ) {
-    return this.postsService.createPost(title, content, category, tags, published);
+    try {
+      const postInfo = await this.postsService.createPost(input)
+      return postInfo;
+    } catch (error) {
+      throw error;
+    }
   }
 
   @Mutation(() => Post)
-  async deletePost(@Args('id') id: string) {
-    const deletedPost = await this.postsService.deletePost(id);
-    console.log("the post is")
-    return deletedPost;
+  async updatePost(
+    @Args('id') id: string,
+    @Args('input') input: UpdatePostInput,
+  ): Promise<Post> {
+    try {
+      const updatedPost = await this.postsService.updatePost(id, input);
+      return updatedPost;
+    } catch (error) {
+      throw error;
+    }
+  }
+
+  @Mutation(() => Boolean)
+  async deletePost(@Args('id') id: string): Promise<boolean> {
+    await this.postsService.deletePost(id);
+    return true;
   }
 }

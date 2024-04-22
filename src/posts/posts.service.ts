@@ -16,32 +16,52 @@ export class PostsService {
     return await this.postsRepository.find();
   }
 
-  createPost(
-    title: string,
-    content: string,
-    category: string,
-    tags: string[],
-    published: boolean
+  async createPost(
+    createPostInput: CreatePostInput
   ) {
-    const post = this.postsRepository.create({
-      title,
-      content,
-      category,
-      tags,
-      published,
-    });
-
+    const post = this.postsRepository.create(createPostInput);
     return this.postsRepository.save(post);
   }
 
+  async updatePost(id: string, input: UpdatePostInput): Promise<Post> {
+    const post = await this.postsRepository.findOneBy({ id });
+    if (!post) {
+      throw new Error('Post not found');
+    }
 
-  async deletePost(id: any): Promise<Post> {
-    const post = await this.postsRepository.findOneBy(id);
-    console.log("the post is", post)
+    // Update the post entity with values from the input
+    if (input.title !== undefined) {
+      post.title = input.title;
+    }
+    if (input.content !== undefined) {
+      post.content = input.content;
+    }
+    if (input.category !== undefined) {
+      post.category = input.category;
+    }
+    if (input.tags !== undefined) {
+      post.tags = input.tags;
+    }
+    if (input.published !== undefined) {
+      post.published = input.published;
+    }
+
+    // Save the updated post entity
+    return this.postsRepository.save(post);
+  }
+
+  async deletePost(id: string) {
+    const post: any = await this.postsRepository.find({ where: { id } });
     if (!post) {
       throw new NotFoundException('Post not found');
     }
-    return this.postsRepository.remove(post);
+    try {
+      const postInfo = await this.postsRepository.delete(post)
+      if (!postInfo) throw new NotFoundException('could not delete post');
+      return postInfo;
+    } catch (error) {
+      throw error;
+    }
   }
 
 }
