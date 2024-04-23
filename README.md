@@ -74,11 +74,9 @@ Nest is [MIT licensed](LICENSE).
 
 ## APIs
 
-# Write your query or mutation here
+# create
 
-#create
-
-# mutation {
+#mutation {
 
 #createPost(inputs: {
 
