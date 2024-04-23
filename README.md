@@ -74,6 +74,8 @@ Nest is [MIT licensed](LICENSE).
 
 ## APIs
 
+#http://localhost:3000/graphql
+
 # create
 
 #mutation {
