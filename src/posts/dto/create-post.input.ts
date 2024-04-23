@@ -3,20 +3,17 @@ import { InputType, Int, Field } from '@nestjs/graphql';
 @InputType()
 export class CreatePostInput {
   @Field()
-  title: string
+  title?: string;
 
   @Field()
-  content: string
+  content?: string;
 
   @Field()
-  category: string
+  category?: string;
 
   @Field(() => [String])
-  tags: string[]
+  tags?: string[];
 
   @Field()
-  published: boolean
-
-  @Field({ nullable: true })
-  success: boolean;
+  published?: boolean;
 }

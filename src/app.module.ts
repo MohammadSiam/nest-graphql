@@ -8,7 +8,8 @@ import { join } from 'path';
 import { TypeOrmModule } from '@nestjs/typeorm';
 
 @Module({
-  imports: [PostsModule,
+  imports: [
+    PostsModule,
     TypeOrmModule.forRoot({
       type: 'postgres',
       host: 'localhost',
@@ -22,8 +23,9 @@ import { TypeOrmModule } from '@nestjs/typeorm';
     GraphQLModule.forRoot<ApolloDriverConfig>({
       driver: ApolloDriver,
       autoSchemaFile: join(process.cwd(), 'src/schema.gql'),
-    }),],
+    }),
+  ],
   controllers: [AppController],
   providers: [AppService],
 })
-export class AppModule { }
+export class AppModule {}

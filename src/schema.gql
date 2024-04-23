@@ -4,16 +4,26 @@
 
 type Post {
   id: String!
+  title: String!
+  content: String!
+  category: String!
+  tags: [String!]!
+  published: Boolean!
+}
+
+type DeleteResponse {
+  message: String!
 }
 
 type Query {
-  posts: [Post!]!
+  allPosts: [Post!]!
+  post(id: String!): Post!
 }
 
 type Mutation {
   createPost(inputs: CreatePostInput!): Post!
   updatePost(id: String!, input: UpdatePostInput!): Post!
-  deletePost(id: String!): Boolean!
+  deletePost(id: String!): DeleteResponse!
 }
 
 input CreatePostInput {
@@ -22,7 +32,6 @@ input CreatePostInput {
   category: String!
   tags: [String!]!
   published: Boolean!
-  success: Boolean
 }
 
 input UpdatePostInput {
@@ -31,5 +40,4 @@ input UpdatePostInput {
   category: String
   tags: [String!]
   published: Boolean
-  success: Boolean
 }

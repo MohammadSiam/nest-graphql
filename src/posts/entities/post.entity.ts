@@ -9,18 +9,28 @@ export class Post {
   id: string;
 
   @Column()
+  @Field((type) => String)
   title: string;
 
   @Column({ nullable: true, default: '' })
+  @Field((type) => String)
   content: string;
 
   @Column({ nullable: true, default: '' })
+  @Field((type) => String)
   category: string;
 
   @Column({ type: 'simple-array', nullable: true, default: '{}' })
+  @Field((type) => [String])
   tags: string[];
 
   @Column()
+  @Field((type) => Boolean)
   published: boolean;
+}
 
+@ObjectType()
+export class DeleteResponse {
+  @Field()
+  message: string;
 }
