@@ -30,7 +30,7 @@ export class Post {
 }
 
 @ObjectType()
-export class DeleteResponse {
-  @Field()
+export class deleteResponse {
+  @Field({ nullable: true })
   message: string;
 }

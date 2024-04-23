@@ -11,19 +11,28 @@ type Post {
   published: Boolean!
 }
 
-type DeleteResponse {
-  message: String!
+type deleteResponse {
+  message: String
+}
+
+type User {
+  """Example field (placeholder)"""
+  exampleField: Int!
 }
 
 type Query {
   allPosts: [Post!]!
   post(id: String!): Post!
+  user(id: Int!): User!
 }
 
 type Mutation {
   createPost(inputs: CreatePostInput!): Post!
   updatePost(id: String!, input: UpdatePostInput!): Post!
-  deletePost(id: String!): DeleteResponse!
+  deletePost(id: String!): deleteResponse!
+  createUser(createUserInput: CreateUserInput!): User!
+  updateUser(updateUserInput: UpdateUserInput!): User!
+  removeUser(id: Int!): User!
 }
 
 input CreatePostInput {
@@ -40,4 +49,15 @@ input UpdatePostInput {
   category: String
   tags: [String!]
   published: Boolean
+}
+
+input CreateUserInput {
+  """Example field (placeholder)"""
+  exampleField: Int!
+}
+
+input UpdateUserInput {
+  """Example field (placeholder)"""
+  exampleField: Int
+  id: Int!
 }

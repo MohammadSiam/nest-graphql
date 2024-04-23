@@ -1,6 +1,6 @@
 import { Resolver, Query, Mutation, Args } from '@nestjs/graphql';
 import { PostsService } from './posts.service'; // Import your service
-import { DeleteResponse, Post } from './entities/post.entity'; // Import your entity
+import { deleteResponse, Post } from './entities/post.entity'; // Import your entity
 import { CreatePostInput } from './dto/create-post.input';
 import { UpdatePostInput } from './dto/update-post.input';
 
@@ -51,7 +51,7 @@ export class PostsResolver {
     }
   }
 
-  @Mutation(() => DeleteResponse)
+  @Mutation(() => deleteResponse)
   async deletePost(@Args('id') id: string) {
     try {
       await this.postsService.deletePost(id);
