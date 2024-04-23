@@ -6,7 +6,7 @@ import { UpdatePostInput } from './dto/update-post.input';
 
 @Resolver(() => Post)
 export class PostsResolver {
-  constructor(private readonly postsService: PostsService) {}
+  constructor(private readonly postsService: PostsService) { }
 
   @Query(() => [Post])
   async allPosts() {
@@ -45,7 +45,6 @@ export class PostsResolver {
   ) {
     try {
       const updatedPost = await this.postsService.updatePost(id, input);
-      console.log(updatedPost);
       return updatedPost;
     } catch (error) {
       throw error;

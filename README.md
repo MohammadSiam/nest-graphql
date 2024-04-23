@@ -76,61 +76,32 @@ Nest is [MIT licensed](LICENSE).
 
 #http://localhost:3000/graphql
 
-# create
+#create
 
 #mutation {
 
 #createPost(inputs: {
-
 #title: "Sample Title",
-
 #content: "Sample Content",
-
 #category: "Sample Category",
-
 #tags: ["tag1", "tag2"],
-
 #published: true
-
 #})
-
 #{
-
 #id
-
 #}
-
-#}
-
-# get
-
-#query {
-
-#posts {
-
-#id
-
-#title
-
-#}
-
-#}
-
-# update
-
-#mutation {
 
 #updatePost(
 
-#id: "95b18279-af73-429d-bcf5-88b2faed1476",
+#id: "11ed7bcd-5a40-48f7-9991-10a354d362b5",
 
 #input: {
 
-#title: "Updated Title for id 1...70",
+#title: "Updated Title for id 13....57",
 
 #content: "Updated Content",
 
-#category: "Updated Category",
+#category: "Updated Category2",
 
 #tags: ["tag1", "tag2"],
 
@@ -142,14 +113,48 @@ Nest is [MIT licensed](LICENSE).
 
 #id
 
+#title
+
+#content
+
+#category
+
+#tags
+
+#published
+
+#}
+
+#deletePost(id: "11ed7bcd-5a40-48f7-9991-10a354d362b5") {
+
+#message
+
 #}
 
 #}
 
-# delete
+#get
 
-#mutation {
+#query {
 
-#deletePost(id: "756ef75a-b11d-45c3-8841-d4e4a0dc750d")
+#allPosts {
+
+#id
+
+#title
+
+#}
+
+#post(id: "2b24d68f-e1d0-428f-9ff8-d918d9873314") {
+
+#title
+
+#content
+
+#tags
+
+#category
+
+#}
 
 #}
