@@ -80,76 +80,76 @@ Nest is [MIT licensed](LICENSE).
 
 # mutation {
 
-# createPost(inputs: {
+#createPost(inputs: {
 
-# title: "Sample Title",
+#title: "Sample Title",
 
-# content: "Sample Content",
+#content: "Sample Content",
 
-# category: "Sample Category",
+#category: "Sample Category",
 
-# tags: ["tag1", "tag2"],
+#tags: ["tag1", "tag2"],
 
-# published: true
+#published: true
 
-# })
+#})
 
-# {
+#{
 
-# id
+#id
 
-# }
+#}
 
-# }
+#}
 
-#get
+# get
 
-# query {
+#query {
 
-# posts {
+#posts {
 
-# id
+#id
 
-# title
+#title
 
-# }
+#}
 
-# }
+#}
 
-#update
+# update
 
-# mutation {
+#mutation {
 
-# updatePost(
+#updatePost(
 
-# id: "95b18279-af73-429d-bcf5-88b2faed1476",
+#id: "95b18279-af73-429d-bcf5-88b2faed1476",
 
-# input: {
+#input: {
 
-# title: "Updated Title for id 1...70",
+#title: "Updated Title for id 1...70",
 
-# content: "Updated Content",
+#content: "Updated Content",
 
-# category: "Updated Category",
+#category: "Updated Category",
 
-# tags: ["tag1", "tag2"],
+#tags: ["tag1", "tag2"],
 
-# published: true
+#published: true
 
-# }
+#}
 
-# ) {
+#) {
 
-# id
+#id
 
-# }
+#}
 
-# }
+#}
 
-#delete
+# delete
 
-# mutation {
+#mutation {
 
-# deletePost(id: "756ef75a-b11d-45c3-8841-d4e4a0dc750d")
+#deletePost(id: "756ef75a-b11d-45c3-8841-d4e4a0dc750d")
 
-# }
+#}
