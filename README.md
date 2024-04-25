@@ -80,6 +80,18 @@ Nest is [MIT licensed](LICENSE).
 
 #mutation {
 
+#createUser(createUserInput: {
+#strName: "John Doe",
+#strEmail: "john.doe@example.com",
+#strAddress: "123 Main Street",
+#strPhone: "123-456-7890"
+#}) {
+#strName
+#strEmail
+#strAddress
+#strPhone
+#}
+
 #createPost(inputs: {
 #title: "Sample Title",
 #content: "Sample Content",
