@@ -16,13 +16,22 @@ type deleteResponse {
 }
 
 type User {
-  """Example field (placeholder)"""
-  exampleField: Int!
+  intId: Int!
+  strName: String!
+  strEmail: String!
+  strAddress: String!
+  strPhone: String!
+}
+
+type LoginResponse {
+  access_token: String!
+  user: User!
 }
 
 type Query {
   allPosts: [Post!]!
   post(id: String!): Post!
+  users: [User!]!
   user(id: Int!): User!
 }
 
@@ -33,6 +42,8 @@ type Mutation {
   createUser(createUserInput: CreateUserInput!): User!
   updateUser(updateUserInput: UpdateUserInput!): User!
   removeUser(id: Int!): User!
+  login(loginUserInput: LoginUserInput!): LoginResponse!
+  signup(createUserInput: CreateAuthInput!): User!
 }
 
 input CreatePostInput {
@@ -52,12 +63,28 @@ input UpdatePostInput {
 }
 
 input CreateUserInput {
-  """Example field (placeholder)"""
-  exampleField: Int!
+  strName: String!
+  strEmail: String!
+  strAddress: String!
+  strPhone: String!
 }
 
 input UpdateUserInput {
-  """Example field (placeholder)"""
-  exampleField: Int
+  strName: String
+  strEmail: String
+  strAddress: String
+  strPhone: String
   id: Int!
+}
+
+input LoginUserInput {
+  strName: String!
+  strPassword: String!
+}
+
+input CreateAuthInput {
+  strName: String!
+  strEmail: String!
+  strAddress: String!
+  strPhone: String!
 }
