@@ -9,7 +9,7 @@ import { LoginUserInput } from './dto/login-user.input';
 
 @Resolver(() => Auth)
 export class AuthResolver {
-  constructor(private readonly authService: AuthService) { }
+  constructor(private readonly authService: AuthService) {}
 
   @Mutation(() => LoginResponse)
   login(@Args('loginUserInput') loginUserInput: LoginUserInput) {

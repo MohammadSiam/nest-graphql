@@ -1,4 +1,4 @@
-import { InputType, Int, Field } from '@nestjs/graphql';
+import { Field, InputType } from '@nestjs/graphql';
 
 @InputType()
 export class CreateAuthInput {
@@ -13,4 +13,10 @@ export class CreateAuthInput {
 
   @Field()
   strPhone: string;
+
+  @Field(() => Date, { nullable: true })
+  dteCreatedAt: Date;
+
+  @Field(() => Date, { nullable: true })
+  dteUpdatedAt: Date;
 }

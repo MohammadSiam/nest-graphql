@@ -6,7 +6,7 @@ import { UpdatePostInput } from './dto/update-post.input';
 
 @Resolver(() => Post)
 export class PostsResolver {
-  constructor(private readonly postsService: PostsService) { }
+  constructor(private readonly postsService: PostsService) {}
 
   @Query(() => [Post])
   async allPosts() {

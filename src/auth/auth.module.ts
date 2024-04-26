@@ -11,4 +11,4 @@ import { UsersModule } from 'src/users/users.module';
   imports: [TypeOrmModule.forFeature([Auth]), UsersModule],
   providers: [AuthResolver, AuthService],
 })
-export class AuthModule { }
+export class AuthModule {}

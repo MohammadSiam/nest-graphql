@@ -1,4 +1,4 @@
-import { ObjectType, Field, Int } from '@nestjs/graphql';
+import { Field, Int, ObjectType } from '@nestjs/graphql';
 import { Column, Entity, PrimaryGeneratedColumn } from 'typeorm';
 @Entity('user')
 @ObjectType()
@@ -22,4 +22,20 @@ export class User {
   @Column()
   @Field((type) => String)
   strPhone: string;
+
+  @Column({
+    type: 'timestamp',
+    nullable: true,
+    default: () => 'CURRENT_TIMESTAMP',
+  })
+  @Field(() => Date, { nullable: true })
+  dteCreatedAt: Date;
+
+  @Column({
+    type: 'timestamp',
+    nullable: true,
+    default: () => 'CURRENT_TIMESTAMP',
+  })
+  @Field(() => Date, { nullable: true })
+  dteUpdatedAt: Date;
 }
