@@ -6,11 +6,14 @@ export class Auth {
   @PrimaryGeneratedColumn()
   id: number;
 
-  @Column({ type: 'int', width: 50, nullable: true })
+  @Column({ type: 'int', width: 50 })
   intUserId: number;
 
   @Column()
   strName: string;
+
+  @Column()
+  strPassword: string;
 
   @Column()
   strEmail: string;

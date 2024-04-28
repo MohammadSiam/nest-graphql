@@ -11,6 +11,10 @@ export class User {
   @Field((type) => String)
   strName: string;
 
+  @Column({ nullable: true })
+  @Field((type) => String)
+  strPassword: string;
+
   @Column()
   @Field((type) => String)
   strEmail: string;

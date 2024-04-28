@@ -5,6 +5,7 @@
 type User {
   intId: Int!
   strName: String!
+  strPassword: String!
   strEmail: String!
   strAddress: String!
   strPhone: String!
@@ -71,6 +72,7 @@ input UpdatePostInput {
 
 input CreateUserInput {
   strName: String!
+  strPassword: String!
   strEmail: String!
   strAddress: String!
   strPhone: String!
@@ -78,6 +80,7 @@ input CreateUserInput {
 
 input UpdateUserInput {
   strName: String
+  strPassword: String
   strEmail: String
   strAddress: String
   strPhone: String
@@ -90,7 +93,9 @@ input LoginUserInput {
 }
 
 input CreateAuthInput {
+  intUserId: Float!
   strName: String!
+  strPassword: String!
   strEmail: String!
   strAddress: String!
   strPhone: String!
