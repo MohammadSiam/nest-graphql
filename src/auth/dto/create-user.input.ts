@@ -6,6 +6,9 @@ export class CreateUserInput {
   strName: string;
 
   @Field()
+  strPassword: string;
+
+  @Field()
   strEmail: string;
 
   @Field()

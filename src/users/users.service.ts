@@ -14,7 +14,7 @@ export class UsersService {
   constructor(
     @InjectRepository(User)
     private userRepository: Repository<User>,
-  ) {}
+  ) { }
 
   async create(createUserInput: CreateUserInput) {
     const user = await this.userRepository.create(createUserInput);
@@ -24,6 +24,7 @@ export class UsersService {
       throw new InternalServerErrorException('Could not saved user');
     return savedUser;
   }
+
 
   async findAll() {
     try {
@@ -35,11 +36,11 @@ export class UsersService {
     }
   }
 
-  findOne(id: number) {}
+  findOne(id: number) { }
 
   async findByUserName(name: string) {
     try {
-      const userInfo = await this.userRepository.findOneBy({ strName: name });
+      const userInfo = await this.userRepository.findOne({ where: { strName: name } });
       return userInfo;
     } catch (error) {
       throw error;

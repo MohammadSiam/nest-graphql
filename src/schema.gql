@@ -2,10 +2,23 @@
 # THIS FILE WAS AUTOMATICALLY GENERATED (DO NOT MODIFY)
 # ------------------------------------------------------
 
+type Post {
+  id: String!
+  title: String!
+  content: String!
+  category: String!
+  tags: [String!]!
+  published: Boolean!
+}
+
+type deleteResponse {
+  message: String
+}
+
 type User {
   intId: Int!
   strName: String!
-  strPassword: String!
+  strPassword: String
   strEmail: String!
   strAddress: String!
   strPhone: String!
@@ -21,19 +34,6 @@ scalar DateTime
 type LoginResponse {
   access_token: String!
   user: User!
-}
-
-type Post {
-  id: String!
-  title: String!
-  content: String!
-  category: String!
-  tags: [String!]!
-  published: Boolean!
-}
-
-type deleteResponse {
-  message: String
 }
 
 type Query {
@@ -76,6 +76,8 @@ input CreateUserInput {
   strEmail: String!
   strAddress: String!
   strPhone: String!
+  dteCreatedAt: DateTime
+  dteUpdatedAt: DateTime
 }
 
 input UpdateUserInput {
@@ -84,6 +86,8 @@ input UpdateUserInput {
   strEmail: String
   strAddress: String
   strPhone: String
+  dteCreatedAt: DateTime
+  dteUpdatedAt: DateTime
   id: Int!
 }
 

@@ -16,4 +16,10 @@ export class CreateUserInput {
 
   @Field()
   strPhone: string;
+
+  @Field(() => Date, { nullable: true })
+  dteCreatedAt: Date;
+
+  @Field(() => Date, { nullable: true })
+  dteUpdatedAt: Date;
 }
