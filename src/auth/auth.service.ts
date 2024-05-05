@@ -1,7 +1,10 @@
 import {
   BadRequestException,
+  forwardRef,
+  Inject,
   Injectable,
   InternalServerErrorException,
+  NotFoundException,
   UnauthorizedException,
 } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
@@ -13,6 +16,8 @@ import { Auth } from './entities/auth.entity';
 import { JwtService } from '@nestjs/jwt';
 import { PasswordService } from './utils.password-hash';
 import { CreateUserInput } from 'src/users/dto/create-user.input';
+import { compare } from 'bcrypt';
+import { UpdateAuthInput } from './dto/update-auth.input';
 
 
 @Injectable()
@@ -20,8 +25,9 @@ export class AuthService {
   constructor(
     @InjectRepository(Auth)
     private authRepository: Repository<Auth>,
-    private userService: UsersService,
     private jwtService: JwtService,
+    @Inject(forwardRef(() => UsersService))
+    private userService: UsersService,
     private passwordService: PasswordService
   ) { }
 
@@ -42,7 +48,9 @@ export class AuthService {
     if (!user) {
       throw new UnauthorizedException('User not found');
     }
-    if (strPassword == user.strPassword && strName == user.strName) {
+    const passwordMatch: any = await compare(strPassword, user.strPassword);
+    if (!passwordMatch) throw new BadRequestException('Password did not match');
+    if (passwordMatch && strName == user.strName) {
       const payload = { strName: user.strName, strEmail: user.strEmail };
       const token = this.jwtService.sign(payload);
       return { access_token: token };
@@ -51,8 +59,6 @@ export class AuthService {
 
   async signup(createAuthInput: CreateUserInput) {
     try {
-      // const authInfo = await this.authRepository.findOne({ where: { strPhone: createAuthInput.strPhone } });
-      // if (authInfo) throw new BadRequestException('could not create user');
       const isUserEmailExist = await this.authRepository.findOne({ where: { strEmail: createAuthInput.strEmail } })
       if (isUserEmailExist) throw new UnauthorizedException('Email already exist')
 
@@ -64,7 +70,10 @@ export class AuthService {
       const user: any = await this.userService.findByUserName(
         createAuthInput.strName,
       );
-      console.log(user.intId);
+      createAuthInput = {
+        ...createAuthInput,
+        strPassword: hashPassword
+      }
       if (user) {
         throw new UnauthorizedException('User already exists');
       }
@@ -78,6 +87,25 @@ export class AuthService {
       throw error;
     }
 
+  }
+
+  async updateAuth(id: number, updateAuthInput: UpdateAuthInput) {
+    const auth = await this.authRepository.findOneBy({ intUserId: id });
+    if (!auth) throw new NotFoundException('User not found');
+    try {
+      updateAuthInput = {
+        ...updateAuthInput,
+        dteUpdatedAt: new Date(),
+      }
+      const authInfo = await this.authRepository.save({
+        ...auth,
+        ...updateAuthInput
+      })
+      if (!authInfo) throw new InternalServerErrorException('Could not update auth info');
+      return authInfo;
+    } catch (error) {
+      throw error;
+    }
   }
 }
 

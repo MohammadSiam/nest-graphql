@@ -8,12 +8,15 @@ import { Repository } from 'typeorm';
 import { CreateUserInput } from './dto/create-user.input';
 import { UpdateUserInput } from './dto/update-user.input';
 import { User } from './entities/user.entity';
+import { Auth } from 'src/auth/entities/auth.entity';
+import { AuthService } from '../auth/auth.service';
 
 @Injectable()
 export class UsersService {
   constructor(
     @InjectRepository(User)
     private userRepository: Repository<User>,
+    private authService: AuthService,
   ) { }
 
   async create(createUserInput: CreateUserInput) {
@@ -47,8 +50,24 @@ export class UsersService {
     }
   }
 
-  update(id: number, updateUserInput: UpdateUserInput) {
-    return `This action updates a #${id} user`;
+  async updateUser(id: number, updateUserInput: UpdateUserInput) {
+    const user = await this.userRepository.findOneBy({ intId: id });
+    if (!user) throw new NotFoundException('user not found');
+    try {
+      updateUserInput = {
+        ...updateUserInput,
+        dteUpdatedAt: new Date()
+      }
+      const userInfo = await this.userRepository.save({
+        ...user,
+        ...updateUserInput,
+      });
+      if (!userInfo) throw new InternalServerErrorException('Could not update user');
+      const updateAuth = await this.authService.updateAuth(id, updateUserInput);
+      return userInfo;
+    } catch (error) {
+      throw error;
+    }
   }
 
   async removeUser(id: number) {

@@ -1,4 +1,4 @@
-import { Module } from '@nestjs/common';
+import { forwardRef, Module } from '@nestjs/common';
 import { AuthService } from './auth.service';
 import { AuthResolver } from './auth.resolver';
 import { TypeOrmModule } from '@nestjs/typeorm';
@@ -13,15 +13,16 @@ import { JwtStrategy } from './jwt.strategy';
 import { PasswordService } from './utils.password-hash';
 @Module({
   imports: [
+    TypeOrmModule.forFeature([Auth]),
     PassportModule.register({ defaultStrategy: 'jwt' }),
     PassportModule,
     JwtModule.register({
       secret: 'adcaerasdcasefr',
       signOptions: { expiresIn: '1h' },
     }),
-    TypeOrmModule.forFeature([Auth]),
-    UsersModule,
+    forwardRef(() => UsersModule),
   ],
   providers: [AuthResolver, AuthService, LocalStrategy, JwtStrategy, PasswordService],
+  exports: [AuthService]
 })
 export class AuthModule { }

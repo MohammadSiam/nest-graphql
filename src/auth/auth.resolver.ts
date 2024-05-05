@@ -19,7 +19,9 @@ export class AuthResolver {
   }
 
   @Mutation(() => User)
-  signup(@Args('createUserInput') createAuthInput: CreateAuthInput) {
-    return this.authService.signup(createAuthInput);
+  async signup(@Args('createUserInput') createAuthInput: CreateAuthInput) {
+    return await this.authService.signup(createAuthInput);
   }
+
+
 }

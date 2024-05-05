@@ -34,3 +34,9 @@ export class deleteResponse {
   @Field({ nullable: true })
   message: string;
 }
+
+@ObjectType()
+export class updateResponse {
+  @Field({ nullable: true })
+  message: string;
+}

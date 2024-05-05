@@ -15,8 +15,12 @@ type deleteResponse {
   message: String
 }
 
+type updateResponse {
+  message: String
+}
+
 type User {
-  intId: Int!
+  intId: Int
   strName: String!
   strPassword: String
   strEmail: String!
@@ -48,7 +52,7 @@ type Mutation {
   updatePost(id: String!, input: UpdatePostInput!): Post!
   deletePost(id: String!): deleteResponse!
   createUser(createUserInput: CreateUserInput!): User!
-  updateUser(updateUserInput: UpdateUserInput!): User!
+  updateUser(id: Int!, updateUserInput: UpdateUserInput!): updateResponse!
   removeUser(id: Int!): deleteResponse!
   login(loginUserInput: LoginUserInput!): LoginResponse!
   signup(createUserInput: CreateAuthInput!): User!
@@ -88,7 +92,6 @@ input UpdateUserInput {
   strPhone: String
   dteCreatedAt: DateTime
   dteUpdatedAt: DateTime
-  id: Int!
 }
 
 input LoginUserInput {
